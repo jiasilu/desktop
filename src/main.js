@@ -403,7 +403,7 @@ function handleAppWebContentsCreated(dc, contents) {
     }
 
     log.info(`Untrusted URL blocked: ${url}`);
-    event.preventDefault();
+    //event.preventDefault();
   });
 
   // handle custom login requests (oath, saml):
