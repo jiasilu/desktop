@@ -13,11 +13,11 @@ function createTemplate(mainWindow, config, isDev) {
   };
 
   const appName = app.getName();
-  const firstMenuName = (process.platform === 'darwin') ? appName : 'File';
+  const firstMenuName = (process.platform === 'darwin') ? appName : '文件';
   const template = [];
 
   let platformAppMenu = process.platform === 'darwin' ? [{
-    label: 'About ' + appName,
+    label: '关于 ' + appName,
     role: 'about',
     click() {
       dialog.showMessageBox(mainWindow, {
@@ -26,13 +26,13 @@ function createTemplate(mainWindow, config, isDev) {
       });
     },
   }, separatorItem, {
-    label: 'Preferences...',
+    label: '设置...',
     accelerator: 'CmdOrCtrl+,',
     click() {
       mainWindow.loadURL(settingsURL);
     },
   }] : [{
-    label: 'Settings...',
+    label: '设置...',
     accelerator: 'CmdOrCtrl+,',
     click() {
       mainWindow.loadURL(settingsURL);
@@ -41,7 +41,7 @@ function createTemplate(mainWindow, config, isDev) {
 
   if (config.enableServerManagement === true) {
     platformAppMenu.push({
-      label: 'Sign in to Another Server',
+      label: '连接新服务器',
       click() {
         mainWindow.webContents.send('add-server');
       },
@@ -74,39 +74,39 @@ function createTemplate(mainWindow, config, isDev) {
     ],
   });
   template.push({
-    label: '&Edit',
+    label: '&编辑',
     submenu: [{
-      label: 'Undo',
+      label: '取消',
       accelerator: 'CmdOrCtrl+Z',
       click() {
         mainWindow.webContents.send('undo');
       },
     }, {
-      label: 'Redo',
+      label: '撤回',
       accelerator: 'CmdOrCtrl+SHIFT+Z',
       click() {
         mainWindow.webContents.send('redo');
       },
     }, separatorItem, {
-      label: 'Cut',
+      label: '剪切',
       accelerator: 'CmdOrCtrl+X',
       click() {
         mainWindow.webContents.send('cut');
       },
     }, {
-      label: 'Copy',
+      label: '拷贝',
       accelerator: 'CmdOrCtrl+C',
       click() {
         mainWindow.webContents.send('copy');
       },
     }, {
-      label: 'Paste',
+      label: '粘贴',
       accelerator: 'CmdOrCtrl+V',
       click() {
         mainWindow.webContents.send('paste');
       },
     }, {
-      label: 'Paste and Match Style',
+      label: '粘贴并匹配',
       accelerator: 'CmdOrCtrl+SHIFT+V',
       visible: process.platform === 'darwin',
       click() {
@@ -117,15 +117,15 @@ function createTemplate(mainWindow, config, isDev) {
     }],
   });
   template.push({
-    label: '&View',
+    label: '&浏览',
     submenu: [{
-      label: 'Find..',
+      label: '查找..',
       accelerator: 'CmdOrCtrl+F',
       click(item, focusedWindow) {
         focusedWindow.webContents.send('toggle-find');
       },
     }, {
-      label: 'Reload',
+      label: '重新加载',
       accelerator: 'CmdOrCtrl+R',
       click(item, focusedWindow) {
         if (focusedWindow) {
@@ -137,7 +137,7 @@ function createTemplate(mainWindow, config, isDev) {
         }
       },
     }, {
-      label: 'Clear Cache and Reload',
+      label: '清空缓存并重新加载',
       accelerator: 'Shift+CmdOrCtrl+R',
       click(item, focusedWindow) {
         if (focusedWindow) {
@@ -153,25 +153,25 @@ function createTemplate(mainWindow, config, isDev) {
     }, {
       role: 'togglefullscreen',
     }, separatorItem, {
-      label: 'Actual Size',
+      label: '实际大小',
       accelerator: 'CmdOrCtrl+0',
       click() {
         mainWindow.webContents.send('zoom-reset');
       },
     }, {
-      label: 'Zoom In',
+      label: '缩放增大',
       accelerator: 'CmdOrCtrl+SHIFT+=',
       click() {
         mainWindow.webContents.send('zoom-in');
       },
     }, {
-      label: 'Zoom Out',
+      label: '缩放减小',
       accelerator: 'CmdOrCtrl+-',
       click() {
         mainWindow.webContents.send('zoom-out');
       },
     }, separatorItem, {
-      label: 'Developer Tools for Application Wrapper',
+      label: '应用开发工具',
       accelerator: (() => {
         if (process.platform === 'darwin') {
           return 'Alt+Command+I';
@@ -184,16 +184,16 @@ function createTemplate(mainWindow, config, isDev) {
         }
       },
     }, {
-      label: 'Developer Tools for Current Server',
+      label: '服务器开发工具',
       click() {
         mainWindow.webContents.send('open-devtool');
       },
     }],
   });
   template.push({
-    label: '&History',
+    label: '&历史',
     submenu: [{
-      label: 'Back',
+      label: '返回',
       accelerator: process.platform === 'darwin' ? 'Cmd+[' : 'Alt+Left',
       click: (item, focusedWindow) => {
         if (focusedWindow === mainWindow) {
@@ -203,7 +203,7 @@ function createTemplate(mainWindow, config, isDev) {
         }
       },
     }, {
-      label: 'Forward',
+      label: '前进',
       accelerator: process.platform === 'darwin' ? 'Cmd+]' : 'Alt+Right',
       click: (item, focusedWindow) => {
         if (focusedWindow === mainWindow) {
@@ -217,7 +217,7 @@ function createTemplate(mainWindow, config, isDev) {
 
   const teams = config.teams;
   const windowMenu = {
-    label: '&Window',
+    label: '&窗口',
     submenu: [{
       role: 'minimize',
 
@@ -235,14 +235,14 @@ function createTemplate(mainWindow, config, isDev) {
         },
       };
     }), separatorItem, {
-      label: 'Select Next Server',
+      label: '选择下一个服务器',
       accelerator: 'Ctrl+Tab',
       click() {
         mainWindow.webContents.send('select-next-tab');
       },
       enabled: (teams.length > 1),
     }, {
-      label: 'Select Previous Server',
+      label: '选择上一个服务器',
       accelerator: 'Ctrl+Shift+Tab',
       click() {
         mainWindow.webContents.send('select-previous-tab');
@@ -254,7 +254,7 @@ function createTemplate(mainWindow, config, isDev) {
   const submenu = [];
   if (config.helpLink) {
     submenu.push({
-      label: 'Learn More...',
+      label: '了解更多',
       click() {
         shell.openExternal(config.helpLink);
       },
@@ -262,11 +262,11 @@ function createTemplate(mainWindow, config, isDev) {
     submenu.push(separatorItem);
   }
   submenu.push({
-    label: `Version ${app.getVersion()}`,
+    label: `版本 ${app.getVersion()}`,
     enabled: false,
   });
 
-  template.push({label: 'Hel&p', submenu});
+  template.push({label: '帮助', submenu});
   return template;
 }
 
