@@ -12,17 +12,17 @@ export default function RemoveServerModal(props) {
   return (
     <DestructiveConfirmationModal
       {...rest}
-      title='Remove Server'
-      acceptLabel='Remove'
-      cancelLabel='Cancel'
+      title='移除服务器'
+      acceptLabel='移除'
+      cancelLabel='取消'
       body={(
         <Modal.Body>
           <p>
-            {'This will remove the server from your Desktop App but will not delete any of its data' +
-          ' - you can add the server back to the app at any time.'}
+            {'将服务器从您的应用中移除，但是不会删除任何数据' +
+          ' - 您可以随时将服务器添加回来。'}
           </p>
           <p>
-            {'Confirm you wish to remove the '}<strong>{serverName}</strong>{' server?'}
+            {'请确认您要移除 '}<strong>{serverName}</strong>{' 服务器?'}
           </p>
         </Modal.Body>
       )}
