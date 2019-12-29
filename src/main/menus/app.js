@@ -59,6 +59,7 @@ function createTemplate(mainWindow, config, isDev) {
       role: 'quit',
     }] : [
     separatorItem, {
+      label: '退出',
       role: 'quit',
       accelerator: 'CmdOrCtrl+Q',
       click() {
@@ -113,6 +114,7 @@ function createTemplate(mainWindow, config, isDev) {
         mainWindow.webContents.send('paste-and-match');
       },
     }, {
+      label: '全选',
       role: 'selectall',
     }],
   });
@@ -151,6 +153,7 @@ function createTemplate(mainWindow, config, isDev) {
         }
       },
     }, {
+      label: '全屏',
       role: 'togglefullscreen',
     }, separatorItem, {
       label: '实际大小',
@@ -219,11 +222,13 @@ function createTemplate(mainWindow, config, isDev) {
   const windowMenu = {
     label: '&窗口',
     submenu: [{
+      label: '最小化',
       role: 'minimize',
 
       // empty string removes shortcut on Windows; null will default by OS
       accelerator: process.platform === 'win32' ? '' : null,
     }, {
+      label: '关闭',
       role: 'close',
     }, separatorItem, ...teams.slice(0, 9).map((team, i) => {
       return {
