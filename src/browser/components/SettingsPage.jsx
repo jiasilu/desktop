@@ -358,7 +358,7 @@ export default class SettingsPage extends React.Component {
             <AutoSaveIndicator
               id='serversSaveIndicator'
               savingState={this.state.savingState.servers}
-              errorMessage={'无法保存设置，请重试。'}
+              errorMessage={'无法保存配置，请重试。'}
             />
           </div>
         </Col>
@@ -421,7 +421,7 @@ export default class SettingsPage extends React.Component {
         {'检查拼写错误'}
         <HelpBlock>
           {'自动高亮拼写错误。'}
-          {'只有在英语、法语等设置中有效。'}
+          {'只有在英语、法语等配置中有效。'}
         </HelpBlock>
       </Checkbox>);
 
@@ -516,7 +516,7 @@ export default class SettingsPage extends React.Component {
         >
           {process.platform === 'darwin' ? `在任务栏显示该图标` : '在通知栏显示该图标'}
           <HelpBlock>
-            {'设置在重启后生效。'}
+            {'配置在重启后生效。'}
           </HelpBlock>
         </Checkbox>);
     }

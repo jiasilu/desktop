@@ -26,13 +26,13 @@ function createTemplate(mainWindow, config, isDev) {
       });
     },
   }, separatorItem, {
-    label: '设置...',
+    label: '配置...',
     accelerator: 'CmdOrCtrl+,',
     click() {
       mainWindow.loadURL(settingsURL);
     },
   }] : [{
-    label: '设置...',
+    label: '配置...',
     accelerator: 'CmdOrCtrl+,',
     click() {
       mainWindow.loadURL(settingsURL);
