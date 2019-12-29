@@ -33,7 +33,7 @@ export default class NewTeamModal extends React.Component {
     if (!this.state.saveStarted) {
       return null;
     }
-    return this.state.teamName.length > 0 ? null : 'Name is required.';
+    return this.state.teamName.length > 0 ? null : '请填写团队名称';
   }
 
   getTeamNameValidationState() {
@@ -51,13 +51,13 @@ export default class NewTeamModal extends React.Component {
       return null;
     }
     if (this.state.teamUrl.length === 0) {
-      return 'URL is required.';
+      return '请填写服务器地址';
     }
     if (!(/^https?:\/\/.*/).test(this.state.teamUrl.trim())) {
-      return 'URL should start with http:// or https://.';
+      return '服务器地址。必须以 http:// 或者 https:// 开头.';
     }
     if (!Utils.isValidURL(this.state.teamUrl.trim())) {
-      return 'URL is not formatted correctly.';
+      return '服务器地址格式有误';
     }
     return null;
   }
@@ -77,7 +77,7 @@ export default class NewTeamModal extends React.Component {
     const urlError = this.getTeamUrlValidationError();
 
     if (nameError && urlError) {
-      return 'Name and URL are required.';
+      return '请填写服务器名称和地址';
     } else if (nameError) {
       return nameError;
     } else if (urlError) {
@@ -107,16 +107,16 @@ export default class NewTeamModal extends React.Component {
 
   getSaveButtonLabel() {
     if (this.props.editMode) {
-      return 'Save';
+      return '保存';
     }
-    return 'Add';
+    return '添加';
   }
 
   getModalTitle() {
     if (this.props.editMode) {
-      return 'Edit Server';
+      return '编辑服务器';
     }
-    return 'Add Server';
+    return '添加服务器';
   }
 
   render() {
@@ -156,25 +156,25 @@ export default class NewTeamModal extends React.Component {
             <FormGroup
               validationState={this.getTeamNameValidationState()}
             >
-              <ControlLabel>{'Server Display Name'}</ControlLabel>
+              <ControlLabel>{'服务器名称'}</ControlLabel>
               <FormControl
                 id='teamNameInput'
                 type='text'
                 value={this.state.teamName}
-                placeholder='Server Name'
+                placeholder='服务器名称'
                 onChange={this.handleTeamNameChange.bind(this)}
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
               />
               <FormControl.Feedback/>
-              <HelpBlock>{'The name of the server displayed on your desktop app tab bar.'}</HelpBlock>
+              <HelpBlock>{'服务器名称将会显示在菜单栏'}</HelpBlock>
             </FormGroup>
             <FormGroup
               className='NewTeamModal-noBottomSpace'
               validationState={this.getTeamUrlValidationState()}
             >
-              <ControlLabel>{'Server URL'}</ControlLabel>
+              <ControlLabel>{'服务器地址'}</ControlLabel>
               <FormControl
                 id='teamUrlInput'
                 type='text'
@@ -186,7 +186,7 @@ export default class NewTeamModal extends React.Component {
                 }}
               />
               <FormControl.Feedback/>
-              <HelpBlock className='NewTeamModal-noBottomSpace'>{'The URL of your Mattermost server. Must start with http:// or https://.'}</HelpBlock>
+              <HelpBlock className='NewTeamModal-noBottomSpace'>{'服务器地址。必须以 http:// 或者 https:// 开头.'}</HelpBlock>
             </FormGroup>
           </form>
         </Modal.Body>
@@ -201,7 +201,7 @@ export default class NewTeamModal extends React.Component {
           <Button
             id='cancelNewServerModal'
             onClick={this.props.onClose}
-          >{'Cancel'}</Button>
+          >{'取消'}</Button>
           <Button
             id='saveNewServerModal'
             onClick={this.save.bind(this)}

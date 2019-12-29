@@ -45,7 +45,7 @@ export default class SettingsPage extends React.Component {
     });
 
     config.on('error', (error) => {
-      console.log('Config saving error: ', error);
+      console.log('配置更新失败: ', error);
 
       const savingState = Object.assign({}, this.state.savingState);
       Object.entries(savingState).forEach(([configType, currentState]) => {
@@ -353,12 +353,12 @@ export default class SettingsPage extends React.Component {
           md={10}
           xs={8}
         >
-          <h2 style={settingsPage.sectionHeading}>{'Server Management'}</h2>
+          <h2 style={settingsPage.sectionHeading}>{'服务器管理'}</h2>
           <div className='IndicatorContainer'>
             <AutoSaveIndicator
               id='serversSaveIndicator'
               savingState={this.state.savingState.servers}
-              errorMessage={'Can\'t save your changes. Please try again.'}
+              errorMessage={'无法保存设置，请重试。'}
             />
           </div>
         </Col>
@@ -372,7 +372,7 @@ export default class SettingsPage extends React.Component {
               id='addNewServer'
               href='#'
               onClick={this.toggleShowTeamForm}
-            >{'+ Add New Server'}</a>
+            >{'+ 添加服务器'}</a>
           </p>
         </Col>
       </Row>
@@ -401,11 +401,11 @@ export default class SettingsPage extends React.Component {
           checked={this.state.autostart}
           onChange={this.handleChangeAutoStart}
         >
-          {'Start app on login'}
+          {'开机启动'}
           <HelpBlock>
-            {'If enabled, the app starts automatically when you log in to your machine.'}
+            {'如果选择开机启动，该应用将在开机时自动启动。'}
             {' '}
-            {'The app will initially start minimized and appear on the taskbar.'}
+            {'该应用将会最小化到任务栏。'}
           </HelpBlock>
         </Checkbox>);
     }
@@ -418,10 +418,10 @@ export default class SettingsPage extends React.Component {
         checked={this.state.useSpellChecker}
         onChange={this.handleChangeUseSpellChecker}
       >
-        {'Check spelling'}
+        {'检查拼写错误'}
         <HelpBlock>
-          {'Highlight misspelled words in your messages.'}
-          {' Available for English, French, German, Portuguese, Spanish, and Dutch.'}
+          {'自动高亮拼写错误。'}
+          {'只有在英语、法语等设置中有效。'}
         </HelpBlock>
       </Checkbox>);
 
@@ -435,9 +435,9 @@ export default class SettingsPage extends React.Component {
           checked={this.state.showUnreadBadge}
           onChange={this.handleShowUnreadBadge}
         >
-          {`Show red badge on ${TASKBAR} icon to indicate unread messages`}
+          {`显示未读消息。`}
           <HelpBlock>
-            {`Regardless of this setting, mentions are always indicated with a red badge and item count on the ${TASKBAR} icon.`}
+            {`无论勾选与否，其他用户给您发送的私信都仍然会显示在未读消息里。`}
           </HelpBlock>
         </Checkbox>);
     }
@@ -451,9 +451,9 @@ export default class SettingsPage extends React.Component {
           checked={this.state.notifications.flashWindow === 2}
           onChange={this.handleFlashWindow}
         >
-          {'Flash app window and taskbar icon when a new message is received'}
+          {'在收到新消息时，图标闪烁几秒钟。'}
           <HelpBlock>
-            {'If enabled, app window and taskbar icon flash for a few seconds when a new message is received.'}
+            {'如果勾选，在收到新消息时，图标会闪烁。'}
           </HelpBlock>
         </Checkbox>);
     }
@@ -470,7 +470,7 @@ export default class SettingsPage extends React.Component {
             onChange={this.handleBounceIcon}
             style={{marginRight: '10px'}}
           >
-            {'Bounce the Dock icon'}
+            {'图标闪烁'}
           </Checkbox>
           <Radio
             inline={true}
@@ -483,7 +483,7 @@ export default class SettingsPage extends React.Component {
             }
             onChange={this.handleBounceIconType}
           >
-            {'once'}
+            {'一次'}
           </Radio>
           {' '}
           <Radio
@@ -494,12 +494,12 @@ export default class SettingsPage extends React.Component {
             defaultChecked={this.state.notifications.bounceIconType === 'critical'}
             onChange={this.handleBounceIconType}
           >
-            {'until I open the app'}
+            {'直到打开应用'}
           </Radio>
           <HelpBlock
             style={{marginLeft: '20px'}}
           >
-            {'If enabled, the Dock icon bounces once or until the user opens the app when a new notification is received.'}
+            {'如果选择，图标会闪烁直到您打开应用。'}
           </HelpBlock>
         </FormGroup>
       );
@@ -514,9 +514,9 @@ export default class SettingsPage extends React.Component {
           checked={this.state.showTrayIcon}
           onChange={this.handleChangeShowTrayIcon}
         >
-          {process.platform === 'darwin' ? `Show ${remote.app.getName()} icon in the menu bar` : 'Show icon in the notification area'}
+          {process.platform === 'darwin' ? `在任务栏显示该图标` : '在通知栏显示该图标'}
           <HelpBlock>
-            {'Setting takes effect after restarting the app.'}
+            {'设置在重启后生效。'}
           </HelpBlock>
         </Checkbox>);
     }
@@ -576,10 +576,10 @@ export default class SettingsPage extends React.Component {
         checked={this.state.enableHardwareAcceleration}
         onChange={this.handleChangeEnableHardwareAcceleration}
       >
-        {'Use GPU hardware acceleration'}
+        {'使用GPU进行硬件加速。'}
         <HelpBlock>
-          {'If enabled, Mattermost UI is rendered more efficiently but can lead to decreased stability for some systems.'}
-          {' Setting takes affect after restarting the app.'}
+          {'如果勾选，应用渲染会更快，但是有可能在某些系统下出故障。'}
+          {'重启应用后生效。'}
         </HelpBlock>
       </Checkbox>
     );
@@ -587,12 +587,12 @@ export default class SettingsPage extends React.Component {
     const optionsRow = (options.length > 0) ? (
       <Row>
         <Col md={12}>
-          <h2 style={settingsPage.sectionHeading}>{'App Options'}</h2>
+          <h2 style={settingsPage.sectionHeading}>{'配置选项'}</h2>
           <div className='IndicatorContainer'>
             <AutoSaveIndicator
               id='appOptionsSaveIndicator'
               savingState={this.state.savingState.appOptions}
-              errorMessage={'Can\'t save your changes. Please try again.'}
+              errorMessage={'无法保存配置，请重试。'}
             />
           </div>
           { options.map((opt, i) => (
@@ -611,7 +611,7 @@ export default class SettingsPage extends React.Component {
           style={settingsPage.navbar}
         >
           <div style={{position: 'relative'}}>
-            <h1 style={settingsPage.heading}>{'Settings'}</h1>
+            <h1 style={settingsPage.heading}>{'配置'}</h1>
             <Button
               id='btnClose'
               className='CloseButton'
